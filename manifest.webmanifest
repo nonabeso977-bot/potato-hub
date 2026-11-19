@@ -1,0 +1,15 @@
+{
+  "name": "POTATO HUB",
+  "short_name": "POTATO HUB",
+  "description": "ألعابك المستقلة في مكان واحد",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#100f18",
+  "theme_color": "#100f18",
+  "icons": [
+    {"src":"assets/potato.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
