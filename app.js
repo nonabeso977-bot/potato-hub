@@ -183,6 +183,7 @@ function startDownload(game) {
     toast("لم يُفتح رابط التنزيل. لم نغيّر حالة اللعبة في مكتبتك.");
     return;
   }
+  const previousLibrary = library.map(item => ({...item}));
   const existing = getLibraryEntry(game.id);
   if (existing) {
     existing.id = game.id;
@@ -191,7 +192,11 @@ function startDownload(game) {
   } else {
     library.push({id:game.id,version:game.version,addedAt:new Date().toISOString(),downloadOpenedAt:new Date().toISOString()});
   }
-  persistLibrary();
+  if (!persistLibrary()) {
+    library = previousLibrary;
+    refreshViews();
+    return;
+  }
   refreshViews();
   toast("فُتح رابط التنزيل وسُجل الإصدار المختار في مكتبتك. تثبيت اللعبة غير مؤكد من المتصفح.");
 }
@@ -242,8 +247,11 @@ gameGrid.addEventListener("click",event => {
   const favoriteButton = event.target.closest("[data-favorite]");
   if (favoriteButton) {
     const id = favoriteButton.dataset.favorite;
-    favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites,id];
-    if (writeStore("potatoHubFavorites",favorites)) renderGames();
+    const nextFavorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites,id];
+    if (writeStore("potatoHubFavorites",nextFavorites)) {
+      favorites = nextFavorites;
+      renderGames();
+    }
     return;
   }
   const tryButton = event.target.closest("[data-try]");
@@ -254,8 +262,13 @@ gameGrid.addEventListener("click",event => {
 $("#libraryList").addEventListener("click",event => {
   const removeButton = event.target.closest("[data-library-remove]");
   if (removeButton) {
+    const previousLibrary = library;
     library = library.filter(item => item.id !== removeButton.dataset.libraryRemove);
-    persistLibrary();
+    if (!persistLibrary()) {
+      library = previousLibrary;
+      refreshViews();
+      return;
+    }
     refreshViews();
     toast("أُزيلت اللعبة من مكتبتك على هذا الجهاز.");
     return;
