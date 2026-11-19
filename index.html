@@ -18,7 +18,7 @@
         <span>POTATO <b>HUB</b></span>
       </a>
       <div class="top-actions">
-        <button class="icon-button" id="notificationsButton" aria-label="الإشعارات" title="الإشعارات">
+        <button class="icon-button" id="notificationsButton" aria-label="التحديثات" title="التحديثات">
           <span aria-hidden="true">♧</span><i class="notification-dot" id="notificationDot"></i>
         </button>
         <button class="icon-button" id="themeToggle" aria-label="تغيير المظهر" title="تغيير المظهر">☼</button>
@@ -58,9 +58,18 @@
       </section>
       <section class="game-grid" id="gameGrid" aria-live="polite"></section>
 
+      <section class="library-panel" id="library">
+        <div class="section-heading compact">
+          <div><p class="eyebrow">ألعابك المحفوظة</p><h2>مكتبتي</h2></div>
+          <span class="library-count" id="libraryCount">0 ألعاب</span>
+        </div>
+        <p class="library-note">تظهر هنا الألعاب التي بدأت تنزيلها من المتجر على هذا الجهاز.</p>
+        <div id="libraryList" class="library-list"></div>
+      </section>
+
       <section class="updates-panel" id="updates">
         <div class="section-heading compact">
-          <div><p class="eyebrow">ابقَ على اطلاع</p><h2>آخر التحديثات</h2></div>
+          <div><p class="eyebrow">ابقَ على اطلاع</p><h2>تحديثات ألعاب مكتبتك</h2></div>
           <span class="update-icon">↻</span>
         </div>
         <div id="updatesList" class="updates-list"></div>
@@ -68,7 +77,7 @@
 
       <section class="notification-banner">
         <div class="notification-symbol">♧</div>
-        <div class="notification-copy"><h3>لا تفوّت تحديثات ألعابك</h3><p>فعّل الإشعارات لتصلك أخبار تحديثات الألعاب الموجودة في مكتبتك.</p></div>
+        <div class="notification-copy"><h3>لا تفوّت تحديثات ألعابك</h3><p>فعّل الإشعارات على هذا الجهاز. إرسال التنبيهات عن بُعد يحتاج ربط خادم Push.</p></div>
         <button class="secondary-button" id="enableNotifications">تفعيل</button>
       </section>
     </main>
